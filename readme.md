@@ -38,3 +38,9 @@ Reuse existing elements and update their attribute values where possible.
 
 Skip the stamp components which are equal across the board instead of defaulting
 to time-only.
+
+### Consider allowing overriding min and max values manually or making sticky
+
+Either the API would change to `(…, minValue = 0, maxValue, minStamp, maxStamp)`
+instead of the flag for zeroing the value or the flag would be kept and another
+argument would be added for a forced value range.
