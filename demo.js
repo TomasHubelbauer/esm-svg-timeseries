@@ -13,16 +13,22 @@ window.addEventListener('load', () => {
   // Uncomment the above seed values and comment the loop below for static test
   //render(timeseriesSvg, data);
 
-  let stamp = window.performance.now();
+  let stamp = 0;
+  let stick = undefined;
   window.requestAnimationFrame(function loop(_stamp) {
-    data.push({ stamp: new Date(), value: ~~(1000 / (_stamp - stamp)) });
+    const value = ~~(1000 / (_stamp - stamp));
+    if (stick === undefined || value > stick) {
+      stick = value;
+    }
+
+    data.push({ stamp: new Date(), value });
     stamp = _stamp;
 
     if (data.length === 60) {
       data.shift();
     }
 
-    render(timeseriesSvg, data);
+    render(timeseriesSvg, data, 0, stick);
 
     // Use this when debugging implementation: slow, but responsive browser
     window.setTimeout(() => requestAnimationFrame(loop), 100);

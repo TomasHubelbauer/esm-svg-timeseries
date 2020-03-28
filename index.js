@@ -1,4 +1,4 @@
-export default function render(/** @type {SVGElement} */ svg, /** @type {{ stamp: Date; value: Number; }[]} */ data, /** @type {Boolean} */ zero = true) {
+export default function render(/** @type {SVGElement} */ svg, /** @type {{ stamp: Date; value: Number; }[]} */ data, /** @type {Number} */ forceMinValue = 0, /** @type {Number} */ forceMaxValue) {
   const width = Number(svg.getAttribute('width'));
   const height = Number(svg.getAttribute('height'));
 
@@ -39,9 +39,14 @@ export default function render(/** @type {SVGElement} */ svg, /** @type {{ stamp
     throw new Error('Stamp or value is not valid.');
   }
 
-  // Opt out of jumpy plot by always basing the value at zero
-  if (zero) {
-    minValue = 0;
+  // Override min value if so desired
+  if (forceMinValue) {
+    minValue = forceMinValue;
+  }
+
+  // Override max value if so desired
+  if (forceMaxValue) {
+    maxValue = forceMaxValue;
   }
 
   // Use a dummy SVG text element to perform text measurements

@@ -22,6 +22,14 @@ window.setInterval(() => {
 }, 100);
 ```
 
+The arguments are:
+
+- `svg`: the SVG element instace to render the plot to
+- `data`: an array of `{ stamp: Date, value: Numbe }` points to plot
+- `forceMinValue`: forced min value (default: zero to prevent jumping)
+- `forceMaxValue`: forced max value
+  - Set this to the series' max value if rendering windows to prevent jumping
+
 Check out [`demo.html`](demo.html).
 
 ## To-Do
@@ -38,9 +46,3 @@ Reuse existing elements and update their attribute values where possible.
 
 Skip the stamp components which are equal across the board instead of defaulting
 to time-only.
-
-### Consider allowing overriding min and max values manually or making sticky
-
-Either the API would change to `(…, minValue = 0, maxValue, minStamp, maxStamp)`
-instead of the flag for zeroing the value or the flag would be kept and another
-argument would be added for a forced value range.
